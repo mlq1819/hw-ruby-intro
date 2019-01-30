@@ -2,8 +2,12 @@
 
 # Part 1
 
-def sum arr
-  # YOUR CODE HERE
+def sum(arr)
+  sum = 0
+  for i in 0..arr.length do
+    sum = sum + arr[i]
+  end
+  sum
 end
 
 def max_2_sum arr
