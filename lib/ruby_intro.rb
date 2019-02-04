@@ -2,16 +2,16 @@
 
 # Part 1
 
-def sum(arr)
-  sum = 0
-  for i in 0..arr.length do
-    sum = sum + arr[i]
-  end
-  sum
+def sum(array)
+  array.reduce(:+)
 end
 
-def max_2_sum arr
-  # YOUR CODE HERE
+def max_2_sum(arr)
+  num1 = arr.max
+  arr.delete(num1)
+  num2 = arr.max
+  arr.delete(num2)
+  num1 + num2
 end
 
 def sum_to_n? arr, n
