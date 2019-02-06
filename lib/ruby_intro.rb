@@ -130,5 +130,71 @@ end
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+  def initialize(new_isbn, new_price)
+    begin
+    raise NotAStringError,
+      'Expected argument must be string' unless
+      new_isbn.is_a?(String)
+    raise ArgumentError,
+      'Expected argument must be non-empty string' unless
+      new_isbn.length > 0
+    raise ArgumentError,
+      'Expected argument must be scalar number' unless
+      new_price.is_a?(Integer) || new_price.is_a?(Float)
+    raise ArgumentError,
+      'Expected argument must be positive non-zero number' unless
+      new_price > 0
+    @isbn = new_isbn
+    @price = new_price
+    rescue NotAStringError, ArgumentError => exception
+      "#{exception.class}: #{exception.message}"
+    end
+  end
+  
+  def isbn
+    @isbn
+  end
+  
+  def isbn=(new_isbn)
+    begin
+    raise NotAStringError,
+      'Expected argument must be string' unless
+      new_isbn.is_a?(String)
+    raise ArgumentError,
+      'Expected argument must be non-empty string' unless
+      new_isbn.length > 0
+    @isbn = new_isbn
+    rescue NotAStringError, ArgumentError => exception
+      "#{exception.class}: #{exception.message}"
+    end
+  end
+  
+  def price
+    @price
+  end
+  
+  def price=(new_price)
+    begin
+    raise ArgumentError,
+      'Expected argument must be scalar number' unless
+      new_price.is_a?(Integer) || new_price.is_a?(Float)
+    raise ArgumentError,
+      'Expected argument must be positive non-zero number' unless
+      new_price > 0
+    @price = new_price
+    rescue ArgumentError => exception
+      "#{exception.class}: #{exception.message}"
+    end
+  end
+  
+  def price_as_string
+    if ((self.price - self.price.floor)*100).floor = 0
+      return "$#{self.price.floor(0)}.00"
+    elsif ((self.price - self.price.floor)*100).floor < 10
+      return "$#{self.price.floor(0)}.0#{((self.price - self.price.floor)*100).floor(0)}"
+    else
+      return "$#{self.price.floor(0)}.#{((self.price - self.price.floor)*100).floor(0)}"
+    end
+  end
+  
 end
