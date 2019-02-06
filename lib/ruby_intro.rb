@@ -1,21 +1,56 @@
 # When done, submit this entire file to the autograder.
 
+class NotAnIntegerError < ArgumentError ; end
+
 # Part 1
 
 def sum(array)
-  array.reduce(:+)
+  sum = 0
+  i = 0
+  for i in 0..array.length do
+    begin
+      raise NotAnIntegerError,
+        'Expected argument must be scalar whole number' unless
+        array[i].is_a?(Integer)
+      sum = sum + array[i]
+    rescue NotAnIntegerError => exception
+      "#{exception.class}: #{exception.message}"
+    end
+  end
+  return sum
 end
 
 def max_2_sum(arr)
-  num1 = arr.max
-  arr.delete(num1)
-  num2 = arr.max
-  arr.delete(num2)
-  num1 + num2
+  largest = 0
+  second_largest = 0
+  for i in 0..arr.length do
+    begin
+      raise NotAnIntegerError,
+        'Expected argument must be scalar whole number' unless
+        array[i].is_a?(Integer)
+      if arr[i] > largest
+        second_largest = largest
+        largest = arr[i]
+      elsif arr[i] > second_largest
+        second_largest = arr[i]
+      end
+      rescue NotAnIntegerError => exception
+      "#{exception.class}: #{exception.message}"
+    end
+  end
+  return largest + second_largest
 end
 
-def sum_to_n? arr, n
-  # YOUR CODE HERE
+def sum_to_n(arr, n)
+  x = 0
+  until x = arr.length || arr[x]=n
+   x = x+1
+  end
+  if x < arr.length
+    return true
+  else
+    return false
+  end
 end
 
 # Part 2
