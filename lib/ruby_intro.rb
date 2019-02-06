@@ -145,7 +145,7 @@ class BookInStock
       'Expected argument must be positive non-zero number' unless
       new_price > 0
     @isbn = new_isbn
-    @price = new_price
+    @price = new_price.to_f
     end
   end
   
@@ -179,7 +179,7 @@ class BookInStock
     raise ArgumentError,
       'Expected argument must be positive non-zero number' unless
       new_price > 0
-    @price = new_price
+    @price = new_price.to_f
     rescue ArgumentError => exception
       "#{exception.class}: #{exception.message}"
     end
@@ -187,11 +187,11 @@ class BookInStock
   
   def price_as_string
     if ((@price - @price.floor)*100).floor < 1
-      return "$#{@price.floor(0)}.00"
+      return "$#{@price.floor}.00"
     elsif ((@price - @price.floor)*100).floor < 10
-      return "$#{@price.floor(0)}.0#{((@price - @price.floor)*100).floor(0)}"
+      return "$#{@price.floor}.0#{((@price - @price.floor)*100).floor}"
     else
-      return "$#{@price.floor(0)}.#{((@price - @price.floor)*100).floor(0)}"
+      return "$#{@price.floor}.#{((@price - @price.floor)*100).floor}"
     end
   end
   
