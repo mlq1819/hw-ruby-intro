@@ -132,26 +132,20 @@ end
 class BookInStock
   def initialize(new_isbn, new_price)
     begin
-    puts "#{new_isbn}: #{new_isbn.class.name}\n#{new_price}"
     raise ArgumentError,
       'Expected argument must be string' unless
       new_isbn.is_a?(String)
-    puts "#{new_isbn}: is String"
     raise ArgumentError,
       'Expected argument must be non-empty string' unless
       !new_isbn.empty?
-    puts "#{new_isbn}: is non-empty"
     raise ArgumentError,
       'Expected argument must be scalar number' unless
       new_price.is_a?(Integer) || new_price.is_a?(Float)
     raise ArgumentError,
       'Expected argument must be positive non-zero number' unless
       new_price > 0
-    puts "#{new_price} > 0: #{new_price > 0}"
     @isbn = new_isbn
     @price = new_price
-    rescue ArgumentError => exception
-      "#{exception.class}: #{exception.message}"
     end
   end
   
