@@ -132,21 +132,25 @@ end
 class BookInStock
   def initialize(new_isbn, new_price)
     begin
-    raise NotAStringError,
+    puts "#{new_isbn}: #{new_isbn.class.name}\n#{new_price}"
+    raise ArgumentError,
       'Expected argument must be string' unless
       new_isbn.is_a?(String)
+    puts "#{new_isbn}: is String"
     raise ArgumentError,
       'Expected argument must be non-empty string' unless
-      new_isbn.length > 0
+      !new_isbn.empty?
+    puts "#{new_isbn}: is non-empty"
     raise ArgumentError,
       'Expected argument must be scalar number' unless
       new_price.is_a?(Integer) || new_price.is_a?(Float)
     raise ArgumentError,
       'Expected argument must be positive non-zero number' unless
       new_price > 0
+    puts "#{new_price} > 0: #{new_price > 0}"
     @isbn = new_isbn
     @price = new_price
-    rescue NotAStringError, ArgumentError => exception
+    rescue ArgumentError => exception
       "#{exception.class}: #{exception.message}"
     end
   end
@@ -162,7 +166,7 @@ class BookInStock
       new_isbn.is_a?(String)
     raise ArgumentError,
       'Expected argument must be non-empty string' unless
-      new_isbn.length > 0
+      !new_isbn.empty?
     @isbn = new_isbn
     rescue NotAStringError, ArgumentError => exception
       "#{exception.class}: #{exception.message}"
@@ -188,12 +192,12 @@ class BookInStock
   end
   
   def price_as_string
-    if ((self.price - self.price.floor)*100).floor = 0
-      return "$#{self.price.floor(0)}.00"
-    elsif ((self.price - self.price.floor)*100).floor < 10
-      return "$#{self.price.floor(0)}.0#{((self.price - self.price.floor)*100).floor(0)}"
+    if ((@price - @price.floor)*100).floor < 1
+      return "$#{@price.floor(0)}.00"
+    elsif ((@price - @price.floor)*100).floor < 10
+      return "$#{@price.floor(0)}.0#{((@price - @price.floor)*100).floor(0)}"
     else
-      return "$#{self.price.floor(0)}.#{((self.price - self.price.floor)*100).floor(0)}"
+      return "$#{@price.floor(0)}.#{((@price - @price.floor)*100).floor(0)}"
     end
   end
   
